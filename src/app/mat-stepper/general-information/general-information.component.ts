@@ -82,7 +82,6 @@ export class GeneralInformationComponent implements OnDestroy {
   }
 
   // initializing object properties based off the inputted Object
-
   setObjProp(form: object, obj: object, init: boolean, excludes?: string[]) {
     for (const key in form) {
       if (form.hasOwnProperty(key)) {
@@ -93,10 +92,12 @@ export class GeneralInformationComponent implements OnDestroy {
     return obj;
   }
 
+  // formatting for phone number, uses 3rd party library
   onKey(input) {
     this.formattedPhoneNumber = new AsYouType('US').input(input.target.value);
   }
 
+  // formatting for SSN
   onDashCheck(input) {
     if (input.key !== 'Backspace') {
       this.formattedSSN = input.target.value;
@@ -108,6 +109,7 @@ export class GeneralInformationComponent implements OnDestroy {
     }
   }
 
+  // allows SSN to be pasted and then formatted, rather than typed
   onPaste(input: ClipboardEvent) {
     input.preventDefault();
     const clipboardData = input.clipboardData;
