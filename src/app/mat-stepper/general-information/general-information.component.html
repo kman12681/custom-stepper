@@ -1,0 +1,207 @@
+<div class="general-info">
+  <form [formGroup]="generalInfo">
+    <h5>Demographic Information</h5>
+
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="FirstName"
+        required
+      />
+      <button
+        mat-button
+        *ngIf="showClear?.FirstName"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearInput('FirstName')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="showRequired?.FirstName">
+        {{ requiredMessage }}
+      </mat-error>
+	</mat-form-field>
+	
+    <mat-form-field class="input-field">
+      <input
+        matInput
+        type="text"
+        placeholder="Middle Name"
+        formControlName="MiddleName"
+      />
+      <button
+        mat-button
+        *ngIf="showClear?.MiddleName"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearInput('MiddleName')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <input
+        matInput
+        type="text"
+        placeholder="Last Name"
+        formControlName="LastName"
+        required
+      />
+      <button
+        mat-button
+        *ngIf="showClear?.LastName"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearInput('LastName')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="showRequired?.LastName">
+        {{ requiredMessage }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-select placeholder="Suffix" formControlName="Suffix">
+        <mat-option> -- </mat-option>
+        <mat-option *ngFor="let s of suffix" [value]="s.Suffix">
+          {{ s.Suffix }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Date of Birth"
+        formControlName="DOB"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-select placeholder="Gender" formControlName="Gender" required>
+        <mat-option> -- </mat-option>
+        <mat-option *ngFor="let g of gender" [value]="g.Gender">
+          {{ g.Gender }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="showRequired?.Gender">
+        {{ requiredMessage }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-select placeholder="Race" formControlName="Race">
+        <mat-option> -- </mat-option>
+        <mat-option *ngFor="let r of race; index as i" [value]="r.RaceTypeDesc">
+          {{ r.RaceTypeDesc }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-select placeholder="Ethnicity" formControlName="Ethnicity">
+        <mat-option> -- </mat-option>
+        <mat-option
+          *ngFor="let e of ethnicity; index as i"
+          [value]="e.SampleEthnicityDesc"
+        >
+          {{ e.SampleEthnicityDesc }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-select
+        placeholder="Spoken Language"
+        formControlName="SpokenLanguage"
+      >
+        <mat-option> -- </mat-option>
+        <mat-option
+          *ngFor="let s of language; index as i"
+          [value]="s.LangTypeDesc"
+        >
+          {{ s.LangTypeDesc }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-select
+        placeholder="Written Language"
+        formControlName="WrittenLanguage"
+      >
+        <mat-option> -- </mat-option>
+        <mat-option
+          *ngFor="let w of language; index as i"
+          [value]="w.LangTypeDesc"
+        >
+          {{ w.LangTypeDesc }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <input
+        matInput
+        type="text"
+        placeholder="Social Security Number"
+        formControlName="SSN"
+        pattern="^\d{3}-?\d{2}-?\d{4}$"
+        (keyup)="onDashCheck($event)"
+        (paste)="onPaste($event)"
+      />
+      <button
+        mat-button
+        *ngIf="showClear?.SSN"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearInput('SSN')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="generalInfo.hasError('requiredPattern', ['SSN'])">
+        Please enter a valid SSN
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <span matPrefix>+1 &nbsp;</span>
+      <input
+        matInput
+        type="text"
+        placeholder="Phone Number"
+        formControlName="PhoneNumber"
+        (keyup)="onKey($event)"
+        value="{{ formattedPhoneNumber }}"
+        required
+      />
+      <button
+        mat-button
+        *ngIf="showClear?.PhoneNumber"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearInput('PhoneNumber')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="phoneInvalid">
+        Please enter a valid phone number
+      </mat-error>
+      <mat-error *ngIf="showRequired?.PhoneNumber">
+        {{ requiredMessage }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>

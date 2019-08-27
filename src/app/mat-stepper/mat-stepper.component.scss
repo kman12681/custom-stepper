@@ -1,0 +1,10 @@
+.mat-stepper-component-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mat-stepper-component-flex > div {
+  margin: 0.2rem;
+  width: 100%;
+  height: 100%;
+}

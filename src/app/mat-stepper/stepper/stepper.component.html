@@ -1,0 +1,83 @@
+<div class="stepper">
+  <mat-horizontal-stepper [linear]="false" #stepper labelPosition="end">
+    <mat-step>
+      <ng-template matStepLabel>Select a Tenant</ng-template>
+
+      <app-tenant-tree
+        (lobInfo)="setLobInfo($event)"
+        (selectedTenant)="setSelectedTenant($event)"
+      >
+      </app-tenant-tree>
+
+      <div>
+        <button
+          [disabled]="isStepOneDisabled"
+          mat-raised-button
+          color="primary"
+          matStepperNext
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="generalInfoForm">
+      <ng-template matStepLabel>General Information</ng-template>
+
+      <app-general-information (generalInfoForm)="setGeneralInfoForm($event)">
+      </app-general-information>
+
+      <div>
+        <button mat-raised-button matStepperPrevious>Previous</button>
+        <button
+          [disabled]="isStepTwoDisabled"
+          mat-raised-button
+          color="primary"
+          matStepperNext
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="coverageInfoForm">
+      <ng-template matStepLabel>Coverage Information</ng-template>
+
+      <app-coverage-information
+        (coverageInfoForm)="setCoverageInfoForm($event)"
+      >
+      </app-coverage-information>
+
+      <div>
+        <button mat-raised-button matStepperPrevious>Previous</button>
+        <button
+          [disabled]="isStepThreeDisabled"
+          mat-raised-button
+          color="primary"
+          matStepperNext
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Summary</ng-template>
+
+      <app-summary
+        [selectedTenant]="selectedTenant"
+        [lobInfoField]="lobInfo"
+        [generalInfoForm]="generalInfoForm"
+        [coverageInfoForm]="coverageInfoForm"
+      ></app-summary>
+
+      <div>
+        <button mat-raised-button matStepperPrevious>Previous</button>
+        <button mat-stroked-button color="warn" (click)="stepper.reset()">
+          Reset
+        </button>
+        <button mat-raised-button color="primary">Submit</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

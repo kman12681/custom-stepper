@@ -1,0 +1,41 @@
+<div class="summary">
+  <div class="summary-box">
+    <h4>Tenant Information</h4>
+    <div class="tenant-info">
+      <ng-container>
+        <div class="displayfield">
+          <label>Tenant</label>
+          <span> {{ selectedTenantInfo?.TenantTaxnmyName }} </span>
+        </div>
+      </ng-container>
+    </div>
+    <h4>General Information</h4>
+    <div class="general-info" *ngIf="showGeneralInfo">
+      <ng-container *ngFor="let key of generalInfoKeys">
+        <div class="displayfield">
+          <label>{{ (generalInfo?.controls)[key]?.label }}</label>
+          <ng-container [ngSwitch]="isDate((generalInfo?.value[key]))">
+            <span *ngSwitchCase="true">{{
+              (generalInfo?.value)[key] | date: 'MMMM d, y'
+            }}</span>
+            <span *ngSwitchDefault>{{ (generalInfo?.value)[key] }}</span>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+    <h4>Coverage Information</h4>
+    <div class="coverage-info" *ngIf="showCoverageInfo">
+      <ng-container *ngFor="let key of coverageInfoKeys">
+        <div class="displayfield">
+          <label>{{ (coverageInfo?.controls)[key]?.label }}</label>
+          <ng-container [ngSwitch]="isDate((coverageInfo?.value[key]))">
+            <span *ngSwitchCase="true">{{
+              (coverageInfo?.value)[key] | date: 'MMMM d, y'
+            }}</span>
+            <span *ngSwitchDefault>{{ (coverageInfo?.value)[key] }}</span>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

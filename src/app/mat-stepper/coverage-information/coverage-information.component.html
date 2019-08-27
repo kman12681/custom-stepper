@@ -1,0 +1,15 @@
+<div class="coverage-info">
+  <form [formGroup]="coverageInfo">
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Effective Start Date"
+        formControlName="EfctvStrtDt"
+        required
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
